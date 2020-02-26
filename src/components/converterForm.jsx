@@ -14,15 +14,21 @@ export default class components extends Component {
         this.validateConvertedValue = this.validateConvertedValue.bind(this)
         this.resetForm = this.resetForm.bind(this)
         this.converterBin2Dec = this.converterBin2Dec.bind(this)
+        this.changeConvertedValue = this.changeConvertedValue.bind(this)
     }
     validateInput(e){
+        e.persist();
         let target = e.target.value;
         const BinaryRegex = /^[0,1]+$/;
-        if (!BinaryRegex.test(target)){
-            this.setState({inputError:'Invalid value, please enter 0 or 1'})
+        if(!target){
+            this.resetForm();
         }else{
-            this.setState({inputError:''})
-            this.setState({binaryInput:target})
+            if (!BinaryRegex.test(target)){
+                this.setState({inputError:'Invalid value, please enter 0 or 1'})
+            }else{
+                this.setState({inputError:''})
+                this.setState({binaryInput:target})
+            }
         }
     }
 
@@ -41,8 +47,14 @@ export default class components extends Component {
         })
     }
 
-    converterBin2Dec(){
+    changeConvertedValue(){
         this.setState({convertedValue:true})
+    }
+
+    converterBin2Dec(){
+        this.changeConvertedValue();
+        let decimalInput = parseInt(this.state.binaryInput,2);
+        this.setState({decimalInput});
     }
 
 
