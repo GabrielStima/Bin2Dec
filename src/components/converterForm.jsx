@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/converterForm.css';
 
-export default class components extends Component {
+export default class converterForm extends Component {
     constructor(){
         super();
         this.state={
